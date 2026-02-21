@@ -78,3 +78,65 @@ Name → descending */
 /*
 .reversed() always flips whatever came before it in the chain. So if you call it at the end, it flips everything. To reverse only one part, isolate it inside its own Comparator.comparing(...).reversed() block before chaining.
 */
+//-------------------------------------------------------
+//without java 8
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+import java.util.stream.*;
+class Main {
+    public static void main(String[] args) {
+        System.out.println("Try programiz.pro");
+        List<Candidate> list = Arrays.asList(
+            new Candidate("Alice", 87),
+            new Candidate("Bob", 92),
+            new Candidate("Charlie", 87),
+            new Candidate("David", 95)
+        );
+        List<Candidate> result = topK(list, 3);
+
+        for (Candidate c : result) {
+            System.out.println(c);
+        }
+    }
+    public static List<Candidate> topK(List<Candidate> candidates, int k){
+       if(candidates==null || k<0){ return new ArrayList<>();}
+       candidates.sort((a,b)-> {
+           if(a.score!=b.score){
+           return Integer.compare(b.score, a.score); //desc
+       }
+       return a.name.compareTo(b.name); //asc
+       });
+       return candidates.subList(0, Math.min(k, candidates.size())) ;
+    }
+}
+class Candidate {
+    String name;
+    int score;
+
+    Candidate(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - " + score;
+    }
+    
+    public int score(){
+        return this.score;
+    }
+    public String name(){
+        return this.name;
+    }
+}
+/*
+.thenComparing(Candidate::name).reversed()
+This reverses the entire comparator (score + name), so it flips everything:
+
+Score → ascending (broken!)
+Name → descending */
+/*
+.reversed() always flips whatever came before it in the chain. So if you call it at the end, it flips everything. To reverse only one part, isolate it inside its own Comparator.comparing(...).reversed() block before chaining.
+*/
