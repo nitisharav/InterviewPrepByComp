@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+      <h1 class="title">Hello World!</h1>
+      <p id="currentTime"></p>
+      <form id="myForm">
+        
+        <input type="text" id="name" placeholder="Enter Name"/>
+        <input type="email" id="email" placeholder="Enter email"/>
+        
+        <button type="submit"> Submit</button>
+        <div id="output"></div>
+      </form>
+      <script>
+        
+        document.getElementById("myForm").addEventListener("submit", function(e){
+         e.preventDefault(); //
+          alert("submit button clicked");
+          
+          const name= document.getElementById("name").value.trim();
+          const email= document.getElementById("email").value.trim();
+          alert(`Email: ${name} and Email: ${email}`);
+          const output= document.getElementById("output");
+          const newEntry= document.createElement("p");
+          newEntry.textContent=`Email: ${name} and Email: ${email}`;
+          output.appendChild(newEntry);
+          this.reset();
+        })
+      </script>
+  </body>
+  
+
+</html>
